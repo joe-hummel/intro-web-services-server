@@ -31,6 +31,12 @@ app.get('/', (req, res) => {
 //
 app.get('/incr/:x', (req, res) => {
 
+  console.log('**call to /incr');
+
+  let x = parseInt(req.params.x);
+  let y = x + 1;
+
+  res.send(y.toString());
 
   return;
 });
@@ -38,6 +44,9 @@ app.get('/incr/:x', (req, res) => {
 // add x and y:
 app.get('/add/:x/:y', (req, res) => {
   
+  console.log('**call to /add');
+
+  res.send('/add not implemented!');
 
   return;
 });
@@ -45,6 +54,9 @@ app.get('/add/:x/:y', (req, res) => {
 // raise x to the exponent e:
 app.get('/pow/:x/:e', (req, res) => {
 
+  console.log('**call to /pow');
+
+  res.send('/pow not implemented!');
 
   return;
 });
