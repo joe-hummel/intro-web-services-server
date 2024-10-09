@@ -106,11 +106,10 @@ app.get("/movies/topNwithM", (req, res) => {
     let N = 10; // defaults:
     let M = 100;
 
-    //
-    // TODO: check if N or M is specified as a query
-    // parameter (req.query.?), and if so, parseInt
-    // and update
-    //
+    if (req.query.N)
+      N = parseInt(req.query.N);
+    if (req.query.M)
+      M = parseInt(req.query.M);
 
     console.log("**call to /movies/topNwithM where N=", N, "and M=", M);
 
