@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
 
 app.get("/movies", (req, res) => {
   try {
-    console.log("call to /movies...");
+    console.log("**call to /movies...");
 
     let sql = "Select * From Movies Order By Movie_ID LIMIT 20;";
     let params = [];
@@ -59,7 +59,7 @@ app.get("/movies", (req, res) => {
 
 app.get("/movies/top10", (req, res) => {
   try {
-    console.log("call to /movies/top10...");
+    console.log("**call to /movies/top10...");
 
     let sql = `Select Movies.Movie_ID, Title, 
       Count(Rating) As NumReviews, Avg(Rating) As AvgRating
@@ -112,7 +112,7 @@ app.get("/movies/topNwithM", (req, res) => {
     // and update
     //
 
-    console.log("call to /movies/topNwithM where N=", N, "and M=", M);
+    console.log("**call to /movies/topNwithM where N=", N, "and M=", M);
 
     let sql = `Select Movies.Movie_ID, Title, 
       Count(Rating) As NumReviews, Avg(Rating) As AvgRating
@@ -160,20 +160,15 @@ app.get("/movies/topNwithM/:genre", (req, res) => {
     let N = 10; // defaults:
     let M = 100;
 
-    let genre = "Drama";
+    let genre = req.params.genre;
 
-    //
-    // TODO: get genre parameter via req.params.genre
-    //
-
-    //
-    // TODO: check if N or M is specified as a query
-    // parameter (req.query.?), and if so, parseInt
-    // and update
-    //
+    if (req.query.N)
+      N = parseInt(req.query.N);
+    if (req.query.M)
+      M = parseInt(req.query.M);
 
     console.log(
-      "call to /movies/topNwithM/",
+      "**call to /movies/topNwithM/",
       genre,
       "where N=",
       N,
