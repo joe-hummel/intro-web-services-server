@@ -37,7 +37,7 @@ app.get("/movies", (req, res) => {
   try {
     console.log("**call to /movies...");
 
-    let sql = "Select * From Movies Order By Movie_ID LIMIT 20;";
+    let sql = "Select * From Movies Order By Movie_ID; -- LIMIT 20;";
     let params = [];
 
     movielens.all(sql, params, (err, rows) => {
