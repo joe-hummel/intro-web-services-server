@@ -31,14 +31,24 @@ app.get('/', (req, res) => {
 //
 app.get('/incr/:x', (req, res) => {
 
-  console.log('**call to /incr');
+  try 
+  {
+    console.log('**call to /incr');
 
-  let x = parseInt(req.params.x);
-  let y = x + 1;
+    let x = parseInt(req.params.x);
+    
+    if (isNaN(x))
+      throw new Error("x is not a number");
+      
+    let y = x + 1;
 
-  res.send(y.toString());
+    res.send(y.toString());
 
-  return;
+    return;
+  }
+  catch(err) {
+    res.status(400).send(err.message);
+  }
 });
 
 // add x and y:
