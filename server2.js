@@ -42,7 +42,7 @@ app.get("/movies", (req, res) => {
 
     movielens.all(sql, params, (err, rows) => {
       if (err) {
-        res.status(400).json({ message: err.message, data: [] });
+        res.status(500).json({ message: err.message, data: [] });
         return;
       }
 
@@ -53,7 +53,7 @@ app.get("/movies", (req, res) => {
 
     console.log("about to return");
   } catch (err) {
-    res.status(400).json({ message: err.message, data: [] });
+    res.status(500).json({ message: err.message, data: [] });
   }
 });
 
@@ -77,7 +77,7 @@ app.get("/movies/top10", (req, res) => {
 
     movielens.all(sql, params, (err, rows) => {
       if (err) {
-        res.status(400).json({ message: err.message, data: [] });
+        res.status(500).json({ message: err.message, data: [] });
         return;
       }
 
@@ -88,7 +88,7 @@ app.get("/movies/top10", (req, res) => {
       console.log("about to return");
     });
   } catch (err) {
-    res.status(400).json({ message: err.message, data: [] });
+    res.status(500).json({ message: err.message, data: [] });
   }
 });
 
@@ -110,6 +110,15 @@ app.get("/movies/topNwithM", (req, res) => {
       N = parseInt(req.query.N);
     if (req.query.M)
       M = parseInt(req.query.M);
+    
+    if (isNaN(N)) {
+      res.status(400).json({ message: "N is not a number", data: [] });
+      return;
+    }
+    if (isNaN(M)) {
+      res.status(400).json({ message: "M is not a number", data: [] });
+      return;
+    }
 
     console.log("**call to /movies/topNwithM where N=", N, "and M=", M);
 
@@ -129,7 +138,7 @@ app.get("/movies/topNwithM", (req, res) => {
 
     movielens.all(sql, params, (err, rows) => {
       if (err) {
-        res.status(400).json({ message: err.message, data: [] });
+        res.status(500).json({ message: err.message, data: [] });
         return;
       }
 
@@ -140,7 +149,7 @@ app.get("/movies/topNwithM", (req, res) => {
       console.log("about to return");
     });
   } catch (err) {
-    res.status(400).json({ message: err.message, data: [] });
+    res.status(500).json({ message: err.message, data: [] });
   }
 });
 
@@ -165,6 +174,15 @@ app.get("/movies/topNwithM/:genre", (req, res) => {
       N = parseInt(req.query.N);
     if (req.query.M)
       M = parseInt(req.query.M);
+    
+    if (isNaN(N)) {
+      res.status(400).json({ message: "N is not a number", data: [] });
+      return;
+    }
+    if (isNaN(M)) {
+      res.status(400).json({ message: "M is not a number", data: [] });
+      return;
+    }
 
     console.log(
       "**call to /movies/topNwithM/",
@@ -194,7 +212,7 @@ app.get("/movies/topNwithM/:genre", (req, res) => {
 
     movielens.all(sql, params, (err, rows) => {
       if (err) {
-        res.status(400).json({ message: err.message, data: [] });
+        res.status(500).json({ message: err.message, data: [] });
         return;
       }
 
@@ -205,6 +223,18 @@ app.get("/movies/topNwithM/:genre", (req, res) => {
       console.log("about to return");
     });
   } catch (err) {
-    res.status(400).json({ message: err.message, data: [] });
+    res.status(500).json({ message: err.message, data: [] });
+  }
+});
+
+app.get("/movies/:id", (req, res) => {
+  try {
+    console.log("**call to /movies/:id");
+    
+    res.json({ message: "not yet implemented", data: {} });
+
+    return;
+  } catch (err) {
+    res.status(500).json({ message: err.message, data: {} });
   }
 });
